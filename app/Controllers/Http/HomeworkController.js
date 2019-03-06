@@ -1,6 +1,7 @@
 'use strict'
 
 const Homework = use('App/Models/Homework')
+const Database = use('Database')
 
 class HomeworkController {
 
@@ -57,6 +58,12 @@ class HomeworkController {
         await homework.delete()
 
         return response.status(204).json(null)
+    }
+
+    async list ({params, response}){
+        const homeworks = await Database.select('*').from('homework').whereRaw('JSON_SEARCH(students, \'all\', '+ params.id +') is not null')
+
+        return response.json(homeworks)
     }
 }
 

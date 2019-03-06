@@ -23,6 +23,7 @@ Route.get('/', () => {
 Route.group(() =>{
   Route.get('homeworks', 'HomeworkController.index')
   Route.get('homeworks/:id', 'HomeworkController.show')
+  Route.get('homeworks/list/:id', 'HomeworkController.list')
   Route.post('homeworks', 'HomeworkController.store')
   Route.put('homeworks/:id','HomeworkController.update')
   Route.delete('homeworks/:id','HomeworkController.delete')
