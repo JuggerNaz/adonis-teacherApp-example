@@ -21,10 +21,12 @@ Route.get('/', () => {
 })
 
 Route.group(() =>{
+  Route.post('/register', 'AuthController.register')
+  Route.post('/login', 'AuthController.login')
   Route.get('homeworks', 'HomeworkController.index')
   Route.get('homeworks/:id', 'HomeworkController.show')
   Route.get('homeworks/list/:id', 'HomeworkController.list')
-  Route.post('homeworks', 'HomeworkController.store')
-  Route.put('homeworks/:id','HomeworkController.update')
-  Route.delete('homeworks/:id','HomeworkController.delete')
+  Route.post('homeworks', 'HomeworkController.store').middleware('auth')
+  Route.put('homeworks/:id','HomeworkController.update').middleware('auth')
+  Route.delete('homeworks/:id','HomeworkController.delete').middleware('auth')
 }).prefix('api/v1/teacher')
